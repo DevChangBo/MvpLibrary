@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">arms</string>
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="LOADING">Loading...</string>
+
+    <string name="ip_all_images">所有图片</string>
+    <string name="ip_folder_image_count">共%1$d张</string>
+    <string name="ip_preview_image_count">%1$d/%2$d</string>
+    <string name="ip_select_limit">最多选择%1$d张图片</string>
+    <string name="ip_complete">完成</string>
+    <string name="ip_select_complete">完成(%1$d/%2$d)</string>
+    <string name="ip_preview">预览</string>
+    <string name="ip_preview_count">预览(%1$d)</string>
+    <string name="ip_photo_crop">图片裁剪</string>
+    <string name="ip_origin">原图</string>
+    <string name="ip_origin_size">原图(%1$s)</string>
+
+
+
+    <string name="pickerview_cancel">取消</string>
+    <string name="pickerview_submit">确定</string>
+    <string name="pickerview_year">年</string>
+    <string name="pickerview_month">月</string>
+    <string name="pickerview_day">日</string>
+    <string name="pickerview_hours">时</string>
+    <string name="pickerview_minutes">分</string>
+    <string name="pickerview_seconds">秒</string>
+
+
+    <string name="customactivityoncrash_error_activity_error_occurred_explanation">程序出现意外\n很抱歉给您带来不便。</string>
+    <string name="customactivityoncrash_error_activity_restart_app">重启软件</string>
+    <string name="customactivityoncrash_error_activity_close_app">关闭软件</string>
+    <string name="customactivityoncrash_error_activity_error_details">错误详情</string>
+    <string name="customactivityoncrash_error_activity_error_details_title">奔溃详情</string>
+    <string name="customactivityoncrash_error_activity_error_details_close">关闭</string>
+    <string name="customactivityoncrash_error_activity_error_details_copy">复制到剪切板</string>
+    <string name="customactivityoncrash_error_activity_error_details_copied">复制成功</string>
+    <string name="customactivityoncrash_error_activity_error_details_clipboard_label">Error information</string>
+</resources>
