@@ -127,6 +127,7 @@ dependencies {
     compile rootProject.ext.dependencies["timber"]
     testCompile rootProject.ext.dependencies["junit"]
     compile 'com.mylhyl:zxingscanner:2.1.0'//二维码扫描生成
+    implementation 'me.yokeyword:fragmentation:1.3.5'
 }
 
 

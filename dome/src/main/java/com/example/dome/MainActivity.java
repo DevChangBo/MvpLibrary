@@ -1,18 +1,17 @@
 package com.example.dome;
 
-import android.Manifest;
-import android.app.Application;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.ViewUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.FrameLayout;
 
-import com.jess.arms.utils.DialogUtils;
-import com.jess.arms.utils.PermissionUtil;
-import com.jess.arms.widget.dialog.SweetAlertDialog;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.example.dome.util.BottomBar;
+import com.example.dome.util.BottomBarTab;
+import com.jess.arms.base.BaseActivity;
+import com.jess.arms.di.component.AppComponent;
 
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import timber.log.Timber;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * ================================================================
@@ -22,53 +21,60 @@ import timber.log.Timber;
  * 码    农：你不是我记忆中Bug、但致命的程度没两样！
  * ================================================================
  */
-public class MainActivity extends AppCompatActivity {
-    public SweetAlertDialog mDialog;//对话框
+public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.contentContainer)
+    FrameLayout contentContainer;
+    @BindView(R.id.bottomBar)
+    BottomBar bottomBar;
+
+    /**
+     * 提供 AppComponent(提供所有的单例对象)给实现类,进行 Component 依赖
+     *
+     * @param appComponent
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void setupActivityComponent(AppComponent appComponent) {
 
-
-
-        PermissionUtil.requestPermission(new PermissionUtil.RequestPermission() {
-                                             @Override
-                                             public void onRequestPermissionSuccess() {
-                                                 showDialog("提示", "授权成功", SweetAlertDialog.SUCCESS_TYPE);
-                                             }
-
-                                             @Override
-                                             public void onRequestPermissionFailure() {
-                                                 showDialog("提示", "您有未授予的权限，可能导致部分功能闪退，请点击\"设置\"授权相关权限", SweetAlertDialog.ERROR_TYPE);
-                                             }
-                                         }, new RxPermissions(this), getRxErrorHandler(getApplication()),
-                /**
-                 * 注释后面有 1 的为显示确认访问、无 1 的为隐藏默认访问
-                 */
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.WAKE_LOCK,
-                Manifest.permission.WRITE_SETTINGS);
     }
 
-
-
-    public void showDialog(String title, String content, int dialogType) {
-    mDialog=DialogUtils.getInstance().getDialog(this,title,content,dialogType,false, new SweetAlertDialog.OnSweetClickListener() {
-        @Override
-        public void onClick(SweetAlertDialog sweetAlertDialog) {
-            mDialog.dismiss();
-        }
-    });
-        mDialog.show();
+    /**
+     * 初始化 View,如果initView返回0,框架则不会调用{@link Activity#setContentView(int)}
+     *
+     * @param savedInstanceState
+     * @return
+     */
+    @Override
+    public int initView(Bundle savedInstanceState) {
+        return R.layout.activity_main;
     }
 
-    public RxErrorHandler getRxErrorHandler(Application mApplication){
-        return   RxErrorHandler
-                .builder()
-                .with(mApplication)
-                .responseErrorListener((context, t) -> Timber.e("异常"))
-                .build();
+    /**
+     * 初始化数据
+     *
+     * @param savedInstanceState
+     */
+    @Override
+    public void initData(Bundle savedInstanceState) {
+        bottomBar.addItem(new BottomBarTab(this, R.mipmap.ic_news, "新闻"))
+                .addItem(new BottomBarTab(this, R.mipmap.ic_video, "视频"))
+                .addItem(new BottomBarTab(this, R.mipmap.ic_jiandan, "煎蛋"))
+                .addItem(new BottomBarTab(this, R.mipmap.ic_my, "我的"));
+        bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position, int prePosition) {
+//                getSupportDelegate().showHideFragment(mFragments[position], mFragments[prePosition]);
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+
+            }
+        });
     }
 }
