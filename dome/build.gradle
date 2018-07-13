@@ -1,40 +1,142 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.mb14.configdroid'//config文件生成
+apply plugin: 'org.greenrobot.greendao'//数据库相关
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
-    defaultConfig {
-        applicationId "com.example.dome"
-        minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 4
-        versionName "1.0.4"
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    useLibrary 'org.apache.http.legacy'
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
-    //打包时跳过检测过期的Api以及系统自检的错误代码
+
+    defaultConfig {
+        applicationId rootProject.ext.android["PACKAGENAME"]
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        multiDexEnabled true
+        //gradle3.0.0报错 加入下面代码
+        javaCompileOptions {
+            annotationProcessorOptions { includeCompileClasspath = true }
+        }
+    }
+    dexOptions {
+        incremental true //开启incremental dexing,优化编译效率，这个功能android studio默认是关闭的。
+        preDexLibraries = false //让它不要对Lib做preDexing
+        javaMaxHeapSize "4g" //增加java堆内存大小
+    }
     lintOptions {
         disable 'InvalidPackage'
         disable "ResourceType"
         abortOnError false
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    signingConfigs {
+        config {
+            keyAlias 'mvpkey'
+            keyPassword '123456'
+            storeFile file('F:/MvpLibrary/mvplibrarykey.jks')
+            storePassword '123456'
         }
     }
 
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+    buildTypes {
+
+        debug {
+            signingConfig signingConfigs.config
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            signingConfig signingConfigs.config
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    configdroid {
+        className rootProject.ext.android["CONFIGNAME"]
+        packageName rootProject.ext.android["PACKAGENAME"]
+        access "public" // Options: public, package-private
+
+        prop "NETWORK_RETRY_TIMES", rootProject.ext.android["NETWORK_RETRY_TIMES"]
+        prop "NETWORK_RETRY_DELAYSECOND", rootProject.ext.android["NETWORK_RETRY_DELAYSECOND"]
+        prop "DBNAME", rootProject.ext.android["DBNAME"]
+        prop "DBCODE", rootProject.ext.android["DBCODE"]
+        prop "CACHE_FILE_NAME", rootProject.ext.android["CACHE_FILE_NAME"]
+        prop "LOG_TAG", rootProject.ext.android["LOG_TAG"]
+
+        buildTypes {
+            debug {
+                //debug模式下的超时时间
+                prop "NETWORK_TIME_OUT", rootProject.ext.android["NETWORK_TIME_OUT_TEST"]
+                prop "LOG_DEBUG", true
+                prop "USE_CANARY", true
+            }
+
+            release {
+                //release模式下的超时时间
+                prop "NETWORK_TIME_OUT", rootProject.ext.android["NETWORK_TIME_OUT_RELEASE"]
+                prop "LOG_DEBUG", false
+                prop "USE_CANARY", false
+            }
+        }
+    }
+
+    greendao {
+        schemaVersion rootProject.ext.android["DBCODE"]//数据库版本号
+        daoPackage rootProject.ext.android["PACKAGENAME"] + '.app.greendao'
+        //设置DaoMaster、DaoSession、Dao包名
+        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+        //targetGenDirTestA：设置生成单元测试目录
+        //generateTests：设置自动生成单元测试用例
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.+'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    /*view*/
+    compile rootProject.ext.dependencies["butterknife"]
+    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
+        exclude module: 'support-annotations'
+        exclude module: 'butterknife-annotations'
+    }
+    compile rootProject.ext.dependencies["paginate"]
+    compile rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    compile rootProject.ext.dependencies["nineGridView"]
+    /*tools*/
+    provided rootProject.ext.dependencies["javax.annotation"]
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+    compile rootProject.ext.dependencies["progressmanager"]
+    compile rootProject.ext.dependencies["retrofit-url-manager"]
+    compile rootProject.ext.dependencies["greendao"]
+    compile rootProject.ext.dependencies["Utils"]
+    //    compile project(':arms')
+    /*test*/
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile rootProject.ext.dependencies["junit"]
+    debugCompile rootProject.ext.dependencies["canary-debug"]
+    releaseCompile rootProject.ext.dependencies["canary-release"]
+    testCompile rootProject.ext.dependencies["canary-release"]
+    compile('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
+    compile 'com.squareup.picasso:picasso:2.5.2'
     implementation project(':mvp')
 }

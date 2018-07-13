@@ -2,7 +2,7 @@ ext {
 
     android = [
 
-            "PACKAGENAME"              : "com.ty.mvp",/*应用包名*/
+            "PACKAGENAME"              : "com.example.dome",/*应用包名*/
             "CONFIGNAME"               : "MVPConfig",/*生成的配置文件名称*/
             "NETWORK_TIME_OUT_RELEASE" : 10,/*正式环境 网请求超时时间*/
             "NETWORK_TIME_OUT_TEST"    : 30,/*测试环境 网络请求超时时间*/
@@ -10,7 +10,8 @@ ext {
             "NETWORK_RETRY_DELAYSECOND": 0,/*配置全局的网络请求失败重试的间隔*/
             "DBNAME"                   : "zst_db",/*数据库名称*/
             "DBCODE"                   : 1,/*数据库版本号*/
-            "CACHE_FILE_NAME"          : "zstcachefiles",/*缓存文件名*/
+            "CACHE_FILE_NAME"          : "mvpfile",/*缓存文件名*/
+            "LOG_TAG"                  : "xxxx",/*日志输出的过滤符*/
 
             compileSdkVersion          : 26,
             buildToolsVersion          : "26.0.2",

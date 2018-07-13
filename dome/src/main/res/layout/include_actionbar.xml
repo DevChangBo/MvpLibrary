@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:background="@drawable/statebarcolor"
+                                     android:orientation="vertical">
+
+
+    <com.jess.arms.widget.autolayout.AutoToolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="159px"
+        android:layout_marginTop="70px"
+        app:contentInsetStart="0dp"
+        >
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:src="@mipmap/ic_arrow_back_white_24dp"/>
+
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="ToolbarTitle"
+            android:textColor="#fff"
+            android:textSize="48px"/>
+
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/toolbar_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            >
+
+            <ImageView
+                android:id="@+id/toolbar_next_image"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:src="@mipmap/setting"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/toolbar_next_text"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:text="确定"/>
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+
+    </com.jess.arms.widget.autolayout.AutoToolbar>
+</com.zhy.autolayout.AutoLinearLayout>
