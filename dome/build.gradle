@@ -25,7 +25,7 @@ android {
         }
     }
     dexOptions {
-        incremental true //开启incremental dexing,优化编译效率，这个功能android studio默认是关闭的。
+//        incremental true //开启incremental dexing,优化编译效率，这个功能android studio默认是关闭的。
         preDexLibraries = false //让它不要对Lib做preDexing
         javaMaxHeapSize "4g" //增加java堆内存大小
     }
@@ -35,31 +35,7 @@ android {
         abortOnError false
     }
 
-    signingConfigs {
-        config {
-            keyAlias 'mvpkey'
-            keyPassword '123456'
-            storeFile file('F:/MvpLibrary/mvplibrarykey.jks')
-            storePassword '123456'
-        }
-    }
 
-    buildTypes {
-
-        debug {
-            signingConfig signingConfigs.config
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-
-        release {
-            signingConfig signingConfigs.config
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
     configdroid {
         className rootProject.ext.android["CONFIGNAME"]
         packageName rootProject.ext.android["PACKAGENAME"]
