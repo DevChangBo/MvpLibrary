@@ -24,9 +24,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.zhy.autolayout.AutoFrameLayout;
+/*import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
-import com.zhy.autolayout.AutoRelativeLayout;
+import com.zhy.autolayout.AutoRelativeLayout;*/
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -87,13 +87,13 @@ public class ThirdViewUtil {
         }
 
         View view = null;
-        if (name.equals(LAYOUT_FRAMELAYOUT)) {
+/*        if (name.equals(LAYOUT_FRAMELAYOUT)) {
             view = new AutoFrameLayout(context, attrs);
         } else if (name.equals(LAYOUT_LINEARLAYOUT)) {
             view = new AutoLinearLayout(context, attrs);
         } else if (name.equals(LAYOUT_RELATIVELAYOUT)) {
             view = new AutoRelativeLayout(context, attrs);
-        }
+        }*/
         return view;
     }
 }

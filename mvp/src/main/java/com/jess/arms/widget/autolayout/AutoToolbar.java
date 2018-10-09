@@ -22,8 +22,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zhy.autolayout.AutoLayoutInfo;
-import com.zhy.autolayout.utils.AutoLayoutHelper;
+/*import com.zhy.autolayout.AutoLayoutInfo;
+import com.zhy.autolayout.utils.AutoLayoutHelper;*/
 
 /**
  * ================================================
@@ -37,7 +37,7 @@ import com.zhy.autolayout.utils.AutoLayoutHelper;
  * ================================================
  */
 public class AutoToolbar extends Toolbar {
-    private AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
+//    private AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
 
     public AutoToolbar(Context context) {
         super(context);
@@ -53,8 +53,8 @@ public class AutoToolbar extends Toolbar {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (!isInEditMode())
-            mHelper.adjustChildren();
+/*        if (!isInEditMode())
+            mHelper.adjustChildren();*/
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -70,7 +70,7 @@ public class AutoToolbar extends Toolbar {
         return new AutoToolbar.LayoutParams(getContext(), attrs);
     }
 
-
+/*
     public static class LayoutParams extends Toolbar.LayoutParams
             implements AutoLayoutHelper.AutoLayoutParams {
         private AutoLayoutInfo mAutoLayoutInfo;
@@ -99,5 +99,5 @@ public class AutoToolbar extends Toolbar {
             super(source);
         }
 
-    }
+    }*/
 }
