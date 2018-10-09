@@ -53,7 +53,7 @@ dependencies {
     }
     compile rootProject.ext.dependencies["annotations"]
     //view
-    compile(rootProject.ext.dependencies["autolayout"]) {
+    compile(rootProject.ext.dependencies["autosize"]) {
         exclude group: 'com.android.support'
     }
     compile(rootProject.ext.dependencies["butterknife"]) {

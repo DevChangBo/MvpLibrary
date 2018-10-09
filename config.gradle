@@ -17,8 +17,8 @@ ext {
             buildToolsVersion          : "26.0.2",
             minSdkVersion              : 16,
             targetSdkVersion           : 26,
-            versionCode                : 4,
-            versionName                : "1.0.4"
+            versionCode                : 5,
+            versionName                : "1.0.5"
 
     ]
     version = [
@@ -63,7 +63,7 @@ ext {
             "picasso"                      : "com.squareup.picasso:picasso:2.5.2",
 
             //view
-            "autolayout"                   : "com.zhy:autolayout:1.4.5",
+            "autosize"                   : "me.jessyan:autosize:0.9.5",
             "butterknife"                  : "com.jakewharton:butterknife:${version["butterknifeSdkVersion"]}",
             "butterknife-compiler"         : "com.jakewharton:butterknife-compiler:${version["butterknifeSdkVersion"]}",
             "pickerview"                   : "com.contrarywind:Android-PickerView:3.2.5",
