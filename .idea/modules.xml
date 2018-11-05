@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MvpLibrary.iml" filepath="$PROJECT_DIR$/MvpLibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MvpLibrary.iml" filepath="$PROJECT_DIR$/MvpLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/dome/dome.iml" filepath="$PROJECT_DIR$/dome/dome.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvp/mvp.iml" filepath="$PROJECT_DIR$/mvp/mvp.iml" />
     </modules>

@@ -50,4 +50,6 @@
 
     <color name="tc_em">#88919a</color>
     <color name="background">#edf3f6</color>
+
+    <color name="color_f6">#f6f6f6</color>
 </resources>

@@ -23,16 +23,19 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.Utils;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.dome.MVPConfig;
 import com.example.dome.R;
 import com.example.dome.app.greendao.DaoMaster;
 import com.jess.arms.base.App;
 import com.jess.arms.base.delegate.AppLifecycles;
+import com.jess.arms.http.imageloader.glide.GlideArms;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.DialogUtils;
 import com.jess.arms.utils.logger.AndroidLogAdapter;
@@ -45,6 +48,8 @@ import com.squareup.leakcanary.RefWatcher;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+
+import java.io.File;
 
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
@@ -106,9 +111,15 @@ public class AppLifecyclesImpl implements AppLifecycles {
         NineGridView.setImageLoader(new NineGridView.ImageLoader() {
             @Override
             public void onDisplayImage(Context context, ImageView imageView, String url) {
-                Picasso.with(context).load(url)//
+             /*   Picasso.with(context).load(url)//
                         .placeholder(R.drawable.ic_default_image)//
                         .error(R.drawable.ic_default_image)//
+                        .into(imageView);*/
+                GlideArms.with(context)                             //配置上下文
+                        .load(url)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
+                        .error(R.drawable.ic_default_image)           //设置错误图片
+                        .placeholder(R.drawable.ic_default_image)     //设置占位图片
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
                         .into(imageView);
             }
 

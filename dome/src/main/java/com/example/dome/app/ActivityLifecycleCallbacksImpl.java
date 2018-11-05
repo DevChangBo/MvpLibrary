@@ -21,6 +21,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 
@@ -49,7 +51,10 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
     public void onActivityStarted(Activity activity) {
         Timber.w(activity + " - onActivityStarted");
         if (Build.VERSION.SDK_INT >= 19){
-            StatusBarCompat.translucentStatusBar(activity,true);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); //透明状态栏，网上通用的方式
+//            StatusBarCompat.translucentStatusBar(activity,true);//设置透明状态栏，第二个参数不写默认未false（false表示去掉状态栏背景）
+//            StatusBarCompat.setStatusBarColor(activity, Color.parseColor("#ffffff"));//设置状态栏的背景颜色 alpha 值
+            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);   //修改状态栏字体颜色
         }
         if (!activity.getIntent().getBooleanExtra("isInitToolbar", false)) {
             //由于加强框架的兼容性,故将 setContentView 放到 onActivityCreated 之后,onActivityStarted 之前执行
@@ -71,9 +76,7 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
                 ((TextView) activity.findViewById(R.id.toolbar_title)).setText(activity.getTitle());
             }
             if (activity.findViewById(R.id.toolbar_back) != null) {
-                activity.findViewById(R.id.toolbar_back).setOnClickListener(v -> {
-                    activity.onBackPressed();
-                });
+                activity.findViewById(R.id.toolbar_back).setOnClickListener(v ->activity.onBackPressed());
             }
         }
     }

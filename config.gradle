@@ -14,18 +14,18 @@ ext {
             "LOG_TAG"                  : "xxxx",/*日志输出的过滤符*/
 
             compileSdkVersion          : 26,
-            buildToolsVersion          : "26.0.2",
+            buildToolsVersion          : "27.0.2",
             minSdkVersion              : 16,
             targetSdkVersion           : 26,
-            versionCode                : 7,
-            versionName                : "1.0.7"
+            versionCode                : 9,
+            versionName                : "1.0.9"
 
     ]
     version = [
-            androidSupportSdkVersion  : "26.1.0",
+            androidSupportSdkVersion  : "27.0.2",
             retrofitSdkVersion        : "2.3.0",
             dagger2SdkVersion         : "2.11",
-            glideSdkVersion           : "4.0.0",
+            glideSdkVersion           : "4.5.0",
             butterknifeSdkVersion     : "8.7.0",
             rxlifecycleSdkVersion     : "1.0",
             rxlifecycle2SdkVersion    : "2.1.0",

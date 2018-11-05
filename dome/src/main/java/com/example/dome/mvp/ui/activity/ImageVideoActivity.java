@@ -1,64 +1,64 @@
 package com.example.dome.mvp.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.dome.R;
-import com.example.dome.di.component.DaggerMainComponent;
-import com.example.dome.di.module.MainModule;
-import com.example.dome.mvp.contract.MainContract;
-import com.example.dome.mvp.presenter.MainPresenter;
+import com.example.dome.di.component.DaggerImageVideoComponent;
+import com.example.dome.di.module.ImageVideoModule;
+import com.example.dome.mvp.contract.ImageVideoContract;
+import com.example.dome.mvp.presenter.ImageVideoPresenter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.tools.imagepicker.adapter.GridImageAdapter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.DialogUtils;
-import com.jess.arms.widget.autolayout.AutoToolbar;
+import com.luck.picture.lib.config.PictureConfig;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
  * ================================================================
- * 创建时间：2018-7-13 10:16:43
+ * 创建时间：2018-11-1 10:20:51
  * 创 建 人：Mr.常
- * 文件描述：
+ * 文件描述：图片视频页面
  * 码    农：你不是我记忆中Bug、但致命的程度没两样！
  * ================================================================
  */
-public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
+public class ImageVideoActivity extends BaseActivity<ImageVideoPresenter> implements ImageVideoContract.View {
 
 
-    @BindView(R.id.toolbar)
-    AutoToolbar toolbar;
-    @BindView(R.id.bt_1)
-    Button bt1;
+    @BindView(R.id.rv_new_image)
+    RecyclerView rvNewImage;
+    @BindView(R.id.rv_new_video)
+    RecyclerView rvNewVideo;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
-        DaggerMainComponent //如找不到该类,请编译一下项目
+        DaggerImageVideoComponent //如找不到该类,请编译一下项目
                 .builder()
                 .appComponent(appComponent)
-                .mainModule(new MainModule(this))
+                .imageVideoModule(new ImageVideoModule(this))
                 .build()
                 .inject(this);
     }
 
     @Override
     public int initView(Bundle savedInstanceState) {
-        return R.layout.activity_main; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_image_video; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        mPresenter.initData();
     }
-
 
     @Override
     public void showLoading() {
@@ -111,12 +111,39 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.bt_1})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.bt_1:
-                mPresenter.strImageVideoAty();
-                break;
+
+    @Override
+    public Activity getActivity() {
+        return ImageVideoActivity.this;
+    }
+
+
+    @Override
+    public void setImageAdapter(GridImageAdapter mAdapter) {
+        rvNewImage.setLayoutManager(new GridLayoutManager(this, 3));
+        rvNewImage.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void setVideoAdapter(GridImageAdapter mAdapter) {
+        rvNewVideo.setLayoutManager(new GridLayoutManager(this, 3));
+        rvNewVideo.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 1:
+                    // 图片选择结果回调
+                    mPresenter.setimageList(data);
+                    break;
+                case PictureConfig.CHOOSE_REQUEST:
+                    // 视频选择结果回调
+                    mPresenter.setVideoList(data);
+                    break;
+            }
         }
     }
 }
