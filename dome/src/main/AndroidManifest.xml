@@ -33,6 +33,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <service android:name="com.jess.arms.voicerecorder.service.PlayService" />
+
         <activity android:name=".mvp.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,8 +42,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.ui.activity.ImageVideoActivity"
-            android:label="图片Or视频"/>
+        <activity
+            android:name=".mvp.ui.activity.ImageVideoActivity"
+            android:label="图片Or视频" />
+        <activity android:name=".mvp.ui.activity.VoiceActivity" />
     </application>
 
 </manifest>

@@ -38,4 +38,14 @@
     <string name="customactivityoncrash_error_activity_error_details_copy">复制到剪切板</string>
     <string name="customactivityoncrash_error_activity_error_details_copied">复制成功</string>
     <string name="customactivityoncrash_error_activity_error_details_clipboard_label">Error information</string>
+
+
+    <string name="move_up_to_cancel">Finger up to cancel sending</string>
+    <string name="release_to_cancel">手指释放以取消发送</string>
+    <string name="recoding_fail">录音失败，请检查您是否授权再试一次！</string>
+
+    <string name="Send_voice_need_sdcard_support">发送语音需要sdCard支持</string>
+    <string name="Recording_without_permission">未经许可录制</string>
+    <string name="The_recording_time_is_too_short">录音时间太短了……</string>
+    <string name="Is_download_voice_click_later">正在下载语音信息，请稍后单击</string>
 </resources>

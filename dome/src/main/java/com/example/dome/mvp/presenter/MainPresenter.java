@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.example.dome.mvp.ui.activity.ImageVideoActivity;
+import com.example.dome.mvp.ui.activity.VoiceActivity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -66,5 +67,9 @@ public class MainPresenter extends BasePresenter<MainContract.Model, MainContrac
 
     public void strImageVideoAty() {
         mRootView.launchActivity(new Intent(mApplication, ImageVideoActivity.class));
+    }
+
+    public void strVoiceAty() {
+        mRootView.launchActivity(new Intent(mApplication, VoiceActivity.class));
     }
 }

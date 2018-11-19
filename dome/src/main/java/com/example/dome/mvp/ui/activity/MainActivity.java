@@ -111,11 +111,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.bt_1})
+    @OnClick({R.id.bt_1,R.id.bt_2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_1:
                 mPresenter.strImageVideoAty();
+                break;
+            case R.id.bt_2:
+                mPresenter.strVoiceAty();
                 break;
         }
     }

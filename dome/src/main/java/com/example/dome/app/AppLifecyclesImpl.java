@@ -41,6 +41,8 @@ import com.jess.arms.utils.DialogUtils;
 import com.jess.arms.utils.logger.AndroidLogAdapter;
 import com.jess.arms.utils.logger.Logger;
 import com.jess.arms.utils.logger.PrettyFormatStrategy;
+import com.jess.arms.voicerecorder.service.PlayService;
+import com.jess.arms.voicerecorder.service.PlayServiceConnection;
 import com.jess.arms.widget.dialog.SweetAlertDialog;
 import com.lzy.ninegrid.NineGridView;
 import com.squareup.leakcanary.LeakCanary;
@@ -128,7 +130,11 @@ public class AppLifecyclesImpl implements AppLifecycles {
                 return null;
             }
         });
+
+        /*初始化语音播放服务*/
+        application.bindService(new Intent(application,PlayService.class),new PlayServiceConnection(),Context.BIND_AUTO_CREATE);
         Timber.d("初始化完成");
+
     }
 
 
