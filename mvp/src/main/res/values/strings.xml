@@ -40,7 +40,7 @@
     <string name="customactivityoncrash_error_activity_error_details_clipboard_label">Error information</string>
 
 
-    <string name="move_up_to_cancel">Finger up to cancel sending</string>
+    <string name="move_up_to_cancel">松开手指，取消发送</string>
     <string name="release_to_cancel">手指释放以取消发送</string>
     <string name="recoding_fail">录音失败，请检查您是否授权再试一次！</string>
 

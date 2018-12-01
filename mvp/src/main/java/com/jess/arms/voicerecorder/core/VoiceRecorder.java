@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import timber.log.Timber;
+
 /**
  * ================================================================
  * 创建时间：2018/11/16 10:22
@@ -79,7 +81,6 @@ public class VoiceRecorder {
                  */
                 PathUtil.getInstance().createDirs("voice", appContext);
             }
-
             voiceFilePath = PathUtil.getInstance().getVoicePath() + "/" + voiceFileName;
             file = new File(voiceFilePath);
             recorder.setOutputFile(file.getAbsolutePath());
@@ -87,7 +88,7 @@ public class VoiceRecorder {
             isRecording = true;
             recorder.start();
         } catch (IOException e) {
-            Log.e("voice", "prepare() failed");
+            Timber.e("voice", "prepare() failed");
         }
         new Thread(new Runnable() {
             @Override

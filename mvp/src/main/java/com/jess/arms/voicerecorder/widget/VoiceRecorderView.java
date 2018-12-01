@@ -128,6 +128,7 @@ public class VoiceRecorderView extends RelativeLayout {
                 }
                 return true;
             case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
                 v.setPressed(false);
                 if (event.getY() < 0) {
                     // discard the recorded audio.

@@ -132,6 +132,9 @@ public class VoicePresenter extends BasePresenter<VoiceContract.Model, VoiceCont
                     }
                 }, mRootView.getPermissions(), mErrorHandler,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.WAKE_LOCK,
+                Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.RECORD_AUDIO
         );
     }
